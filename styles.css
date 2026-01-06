@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rock Salt', cursive; /* Fuente más moderna */
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(120deg, #0a0a0a, #1a1a1a, #0a0a0a);
+    background-size: 400% 400%;
+    animation: moveBg 10s infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+@keyframes moveBg {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+#game {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    gap: 20px;
+}
+
+/* Estilo minimalista y actual para el botón START */
+#startBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: "bangers"; /* Fuente más moderna */
+    transform: translate(-50%, -50%);
+    padding: 20px 24px; /* Padding reducido para minimalismo */
+    font-size: 50px; /* Tamaño de fuente más pequeño */
+    color: #181616; /* Color de texto neutro */
+    background: #fffdfd; /* Fondo gris claro plano */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+    cursor: pointer;
+    font-weight: 500; /* Peso de fuente medio */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+#startBtn:hover {
+    background-color: #ec0707; /* Cambio sutil de color en hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    color: white;
+}
+
+
+/* Estilos para el modal de Game Over */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff; /* Fondo blanco */
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 300px;
+    width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 24px;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 18px;
+}
+
+#restartBtn {
+    padding: 10px 20px;
+    background: #007bff; /* Azul moderno */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#restartBtn:hover {
+    background: #0056b3;
+}
+
+/* ---------------------- */
+/* 🔥 Estética mejorada círculo */
+/* ---------------------- */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    animation: pop 0.2s ease-out;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(255,255,255,0.1) 40%, transparent),
+                var(--color);
+    box-shadow:
+        0 0 15px var(--color),
+        0 0 35px var(--color),
+        inset 0 0 15px rgba(255,255,255,0.6);
+    border: 2px solid rgba(255,255,255,0.4);
+    transition: transform .15s, opacity .2s;
+}
+
+.circle:hover {
+    transform: scale(1.15);
+}
+
+/* animación aparición */
+@keyframes pop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* efecto desaparición suave */
+.fade {
+    opacity: 0;
+    transform: scale(0.7);
+}
+
+/* efecto "explosión" cuando se hace click */
+.spark {
+    position: absolute;
+    pointer-events: none;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: white;
+    animation: spark 0.4s ease-out forwards;
+}
+
+@keyframes spark {
+    to {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(0);
+    }
+}
