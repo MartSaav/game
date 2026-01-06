@@ -8,9 +8,9 @@
 body {
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(120deg, #0a0a0a, #1a1a1a, #0a0a0a);
-    background-size: 400% 400%;
-    animation: moveBg 10s infinite alternate;
+    background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e); /* Gradiente oscuro y sutil con tonos azules/grises */
+    background-size: 400% 400%; /* Tamaño grande para movimiento suave */
+    animation: moveBg 15s ease-in-out infinite; /* Animación suave */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +19,10 @@ body {
 
 @keyframes moveBg {
     0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+    25% { background-position: 100% 50%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+    100% { background-position: 0% 50%; } /* Ciclo completo para un flujo continuo */
 }
 
 #game {
@@ -117,11 +120,11 @@ body {
 /* ---------------------- */
 .circle {
     position: absolute;
-    border-radius: 50%;
+    border-radius: 50%; /* Restaurado para círculos */
     cursor: pointer;
     animation: pop 0.2s ease-out;
     background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(255,255,255,0.1) 40%, transparent),
-                var(--color);
+                var(--color); /* Restaurado radial-gradient para círculos */
     box-shadow:
         0 0 15px var(--color),
         0 0 35px var(--color),
