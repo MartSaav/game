@@ -48,9 +48,9 @@ function startGame() {
             levelText.textContent = "Level: " + level;
         }
 
-        // dificultad progresiva multiplicada por nivel (más desafiante en niveles altos)
-        spawnSpeed = Math.max(200, spawnSpeed - (10 * level));  // Reducción aumentada por nivel
-        circleLifetime = Math.max(200, circleLifetime - (8 * level));  // Reducción aumentada por nivel
+        // dificultad progresiva multiplicada por nivel (menos agresiva para jugabilidad)
+        spawnSpeed = Math.max(300, spawnSpeed - (5 * level));  // Reducción reducida a 5*level
+        circleLifetime = Math.max(300, circleLifetime - (4 * level));  // Reducción reducida a 4*level
 
         if (timeLeft <= 0) endGame();
     }, 1000);
@@ -80,7 +80,7 @@ function endGame() {
 
 function spawnCircle() {
     const circle = document.createElement("div");
-    const size = Math.random() * 60 + 40;  // tamaño reducido para móviles: entre 40 y 100 px (era 50-150)
+    const size = Math.random() * 40 + 60;  // Más grandes: entre 60 y 120 px (favorece tamaños mayores)
     const hue = Math.random() * 360;
 
     circle.classList.add("circle");  // Restaurado a "circle"

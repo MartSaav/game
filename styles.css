@@ -116,20 +116,21 @@ body {
 }
 
 /* ---------------------- */
-/* 🔥 Estética mejorada círculo */
+/* 🔥 Estética mejorada círculo con imagen de pelota de playa */
 /* ---------------------- */
 .circle {
     position: absolute;
-    border-radius: 50%; /* Restaurado para círculos */
+    border-radius: 50%; /* Mantener forma circular */
     cursor: pointer;
-    animation: pop 0.2s ease-out;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(255,255,255,0.1) 40%, transparent),
-                var(--color); /* Restaurado radial-gradient para círculos */
+    animation: pop 0.2s ease-out, spin 10s linear infinite; /* Animación de aparición y rotación lenta */;
+    background-image: url(png-transparent-football-open-graphics-ball-sports-equipment-sports-soccer-ball.png);/* Reemplaza con la URL de tu imagen PNG de pelota de playa plana */
+    background-size: cover; /* Ajustar imagen para cubrir el área */
+    background-position: center; /* Centrar imagen */
+    background-repeat: no-repeat; /* No repetir */
     box-shadow:
-        0 0 15px var(--color),
-        0 0 35px var(--color),
-        inset 0 0 15px rgba(255,255,255,0.6);
-    border: 2px solid rgba(255,255,255,0.4);
+        0 0 15px rgba(0,0,0,0.5), /* Sombra sutil para profundidad */
+        inset 0 0 15px rgba(255,255,255,0.3); /* Brillo interno */
+    border: 2px solid rgba(255,255,255,0.4); /* Borde sutil */
     transition: transform .15s, opacity .2s;
     pointer-events: auto; /* Asegurar que todo el círculo sea clickeable */
 }
@@ -142,6 +143,12 @@ body {
 @keyframes pop {
     0% { transform: scale(0); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
+}
+
+/* animación rotación lenta */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* efecto desaparición suave */
