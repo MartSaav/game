@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Rock Salt', cursive; /* Fuente más moderna */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
 }
 
 body {
@@ -43,12 +43,11 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    font-family: "bangers"; /* Fuente más moderna */
     transform: translate(-50%, -50%);
-    padding: 20px 24px; /* Padding reducido para minimalismo */
-    font-size: 50px; /* Tamaño de fuente más pequeño */
-    color: #181616; /* Color de texto neutro */
-    background: #fffdfd; /* Fondo gris claro plano */
+    padding: 12px 24px; /* Padding reducido para minimalismo */
+    font-size: 18px; /* Tamaño de fuente más pequeño */
+    color: #333; /* Color de texto neutro */
+    background: #f0f0f0; /* Fondo gris claro plano */
     border: none; /* Sin borde */
     border-radius: 4px; /* Bordes ligeramente redondeados */
     cursor: pointer;
@@ -58,11 +57,9 @@ body {
 }
 
 #startBtn:hover {
-    background-color: #ec0707; /* Cambio sutil de color en hover */
+    background-color: #e0e0e0; /* Cambio sutil de color en hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
-    color: white;
 }
-
 
 /* Estilos para el modal de Game Over */
 .modal {
@@ -131,6 +128,7 @@ body {
         inset 0 0 15px rgba(255,255,255,0.6);
     border: 2px solid rgba(255,255,255,0.4);
     transition: transform .15s, opacity .2s;
+    pointer-events: auto; /* Asegurar que todo el círculo sea clickeable */
 }
 
 .circle:hover {

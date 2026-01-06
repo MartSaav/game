@@ -70,17 +70,19 @@ function endGame() {
 
 function spawnCircle() {
     const circle = document.createElement("div");
-    const size = Math.random() * 100 + 50;  // tamaño aumentado: entre 50 y 150 px (era 30-80)
+    const size = Math.random() * 60 + 40;  // tamaño reducido para móviles: entre 40 y 100 px (era 50-150)
     const hue = Math.random() * 360;
 
     circle.classList.add("circle");
     circle.style.setProperty("--color", `hsla(${hue}, 80%, 60%, 0.8)`);
     circle.style.width = size + "px";
     circle.style.height = size + "px";
-    circle.style.top = Math.random() * (window.innerHeight - size) + "px";
+    // Posicionamiento ajustado para evitar superposición con HUD (evitar top 100px)
+    circle.style.top = Math.random() * (window.innerHeight - size - 100) + 100 + "px";
     circle.style.left = Math.random() * (window.innerWidth - size) + "px";
 
-    circle.addEventListener("click", (e) => {
+    // Función para manejar el clic/toque
+    const handleClick = (e) => {
         score++;
         scoreText.textContent = "Score: " + score;
 
@@ -90,10 +92,14 @@ function spawnCircle() {
         if (navigator.vibrate) navigator.vibrate(50); // 📱 vibración mobile
 
         circle.classList.add("fade");
-        createSparks(e.clientX, e.clientY, hue);
+        createSparks(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY, hue); // Soporte para touch
 
         setTimeout(() => circle.remove(), 200);
-    });
+    };
+
+    // Agregar listeners para click y touchstart (para móviles)
+    circle.addEventListener("click", handleClick);
+    circle.addEventListener("touchstart", handleClick, { passive: true }); // Passive para mejor rendimiento en touch
 
     game.appendChild(circle);
 
