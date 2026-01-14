@@ -102,7 +102,7 @@ function spawnCircle() {
         if (navigator.vibrate) navigator.vibrate(50); // 📱 vibración mobile
 
         circle.classList.add("fade");
-        createSparks(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY, hue); // Soporte para touch
+        createConfetti(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY); // Cambiado a confetis
 
         setTimeout(() => circle.remove(), 200);
     };
@@ -116,17 +116,18 @@ function spawnCircle() {
     setTimeout(() => { if (circle.parentNode) circle.remove(); }, circleLifetime);
 }
 
-function createSparks(x, y, hue){
-    for(let i=0;i<6;i++){
-        const spark = document.createElement("div");
-        spark.classList.add("spark");
-        spark.style.left = x + "px";
-        spark.style.top = y + "px";
-        spark.style.background = `hsl(${hue},100%,70%)`;
-        spark.style.setProperty("--x", (Math.random()*80-40)+"px");
-        spark.style.setProperty("--y", (Math.random()*80-40)+"px");
-        document.body.appendChild(spark);
-        setTimeout(()=>spark.remove(),400);
+function createConfetti(x, y) {
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd', '#f7dc6f', '#bb8fce']; // Colores variados para confetis
+    for (let i = 0; i < 20; i++) { // Más confetis (era 6)
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = x + "px";
+        confetti.style.top = y + "px";
+        confetti.style.setProperty("--confetti-color", colors[Math.floor(Math.random() * colors.length)]); // Color aleatorio
+        confetti.style.setProperty("--x", (Math.random() * 200 - 100) + "px"); // Movimiento horizontal más amplio
+        confetti.style.setProperty("--y", (Math.random() * 200 - 100) + "px"); // Movimiento vertical más amplio
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 1500); // Duración más larga (era 400ms)
     }
 }
 

@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+    font-family: 'Press Start 2P', cursive; /* Fuente retro de videojuegos */
 }
 
 body {
@@ -122,8 +122,8 @@ body {
     position: absolute;
     border-radius: 50%; /* Mantener forma circular */
     cursor: pointer;
-    animation: pop 0.2s ease-out, spin 10s linear infinite; /* Animación de aparición y rotación lenta */;
-    background-image: url(png-transparent-football-open-graphics-ball-sports-equipment-sports-soccer-ball.png);/* Reemplaza con la URL de tu imagen PNG de pelota de playa plana */
+    animation: pop 0.2s ease-out, spin 10s linear infinite; /* Animación de aparición y rotación lenta */
+    background-image: url(png-transparent-football-open-graphics-ball-sports-equipment-sports-soccer-ball.png); /* Reemplaza con la URL de tu imagen PNG de pelota de playa plana */
     background-size: cover; /* Ajustar imagen para cubrir el área */
     background-position: center; /* Centrar imagen */
     background-repeat: no-repeat; /* No repetir */
@@ -135,9 +135,7 @@ body {
     pointer-events: auto; /* Asegurar que todo el círculo sea clickeable */
 }
 
-.circle:hover {
-    transform: scale(1.15);
-}
+/* Eliminado el hover para quitar la "sombra cuadrada" (escala) */
 
 /* animación aparición */
 @keyframes pop {
@@ -157,19 +155,24 @@ body {
     transform: scale(0.7);
 }
 
-/* efecto "explosión" cuando se hace click */
-.spark {
+/* efecto "explosión" con confetis más grandes y exagerados */
+.confetti {
     position: absolute;
     pointer-events: none;
-    width: 6px; height: 6px;
+    width: 10px; /* Más grande que antes (era 6px) */
+    height: 10px; /* Más grande */
     border-radius: 50%;
-    background: white;
-    animation: spark 0.4s ease-out forwards;
+    background: var(--confetti-color); /* Color variado */
+    animation: confetti-fall 1.5s ease-out forwards; /* Más larga y exagerada */
 }
 
-@keyframes spark {
-    to {
+@keyframes confetti-fall {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
         opacity: 0;
-        transform: translate(var(--x), var(--y)) scale(0);
+        transform: translateY(200px) rotate(720deg); /* Caída más larga y rotación exagerada */
     }
 }
