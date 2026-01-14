@@ -87,9 +87,11 @@ function spawnCircle() {
     circle.style.setProperty("--color", `hsla(${hue}, 80%, 60%, 0.8)`);
     circle.style.width = size + "px";
     circle.style.height = size + "px";
-    // Posicionamiento ajustado para evitar superposición con HUD (evitar top 100px)
-    circle.style.top = Math.random() * (window.innerHeight - size - 100) + 100 + "px";
-    circle.style.left = Math.random() * (window.innerWidth - size) + "px";
+    // Posicionamiento ajustado para evitar superposición con HUD y overflow en móviles
+    const maxTop = window.innerHeight - size - 100; // Evitar HUD y borde inferior
+    const maxLeft = window.innerWidth - size; // Evitar borde derecho
+    circle.style.top = Math.random() * Math.max(0, maxTop) + 100 + "px"; // Asegurar no negativo
+    circle.style.left = Math.random() * Math.max(0, maxLeft) + "px"; // Asegurar no negativo
 
     // Función para manejar el clic/toque
     const handleClick = (e) => {
@@ -124,10 +126,20 @@ function createConfetti(x, y) {
         confetti.style.left = x + "px";
         confetti.style.top = y + "px";
         confetti.style.setProperty("--confetti-color", colors[Math.floor(Math.random() * colors.length)]); // Color aleatorio
-        confetti.style.setProperty("--x", (Math.random() * 200 - 100) + "px"); // Movimiento horizontal más amplio
-        confetti.style.setProperty("--y", (Math.random() * 200 - 100) + "px"); // Movimiento vertical más amplio
+        // Movimiento radial para explosión: direcciones aleatorias en 360 grados
+        const angle = Math.random() * 2 * Math.PI; // Ángulo aleatorio
+        const distance = Math.random() * 150 + 50; // Distancia aleatoria
+        const xOffset = Math.cos(angle) * distance;
+        const yOffset = Math.sin(angle) * distance;
+        confetti.style.setProperty("--x", xOffset + "px");
+        confetti.style.setProperty("--y", yOffset + "px");
+        // Rotaciones 3D aleatorias
+        const rotateX = (Math.random() - 0.5) * 360 + "deg"; // Rotación X aleatoria
+        const rotateY = (Math.random() - 0.5) * 360 + "deg"; // Rotación Y aleatoria
+        confetti.style.setProperty("--rotateX", rotateX);
+        confetti.style.setProperty("--rotateY", rotateY);
         document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 1500); // Duración más larga (era 400ms)
+        setTimeout(() => confetti.remove(), 800); // Duración más corta para explosión (era 1500ms)
     }
 }
 

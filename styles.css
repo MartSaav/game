@@ -7,7 +7,8 @@
 
 body {
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* Prevención de scroll vertical */
+    overflow-x: hidden; /* Prevención de scroll horizontal */
     background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e); /* Gradiente oscuro y sutil con tonos azules/grises */
     background-size: 400% 400%; /* Tamaño grande para movimiento suave */
     animation: moveBg 15s ease-in-out infinite; /* Animación suave */
@@ -15,6 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
+    perspective: 1000px; /* Agregado para efecto 3D en confetis */
 }
 
 @keyframes moveBg {
@@ -39,6 +41,17 @@ body {
     font-weight: bold;
     display: flex;
     gap: 20px;
+    flex-wrap: wrap; /* Permitir wrap en móviles */
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    #hud {
+        font-size: 14px; /* Fuente más pequeña en móviles */
+        gap: 10px; /* Gap menor */
+        top: 10px;
+        left: 10px;
+    }
 }
 
 /* Estilo minimalista y actual para el botón START */
@@ -155,7 +168,7 @@ body {
     transform: scale(0.7);
 }
 
-/* efecto "explosión" con confetis más grandes y exagerados */
+/* efecto "explosión" con confetis que se expanden radialmente con efecto 3D */
 .confetti {
     position: absolute;
     pointer-events: none;
@@ -163,16 +176,17 @@ body {
     height: 10px; /* Más grande */
     border-radius: 50%;
     background: var(--confetti-color); /* Color variado */
-    animation: confetti-fall 1.5s ease-out forwards; /* Más larga y exagerada */
+    animation: confetti-explode 0.8s ease-out forwards; /* Explosión rápida */
+    transform-style: preserve-3d; /* Agregado para efecto 3D */
 }
 
-@keyframes confetti-fall {
+@keyframes confetti-explode {
     0% {
         opacity: 1;
-        transform: translateY(0) rotate(0deg);
+        transform: translate(0, 0) rotateX(0deg) rotateY(0deg) scale(1);
     }
     100% {
         opacity: 0;
-        transform: translateY(200px) rotate(720deg); /* Caída más larga y rotación exagerada */
+        transform: translate(var(--x), var(--y)) rotateX(var(--rotateX)) rotateY(var(--rotateY)) scale(0.5); /* Expansión radial con rotaciones 3D y desvanecimiento */
     }
 }
