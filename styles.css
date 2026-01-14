@@ -9,14 +9,27 @@ body {
     height: 100vh;
     overflow: hidden; /* Prevención de scroll vertical */
     overflow-x: hidden; /* Prevención de scroll horizontal */
-    background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e); /* Gradiente oscuro y sutil con tonos azules/grises */
-    background-size: 400% 400%; /* Tamaño grande para movimiento suave */
-    animation: moveBg 15s ease-in-out infinite; /* Animación suave */
+    background-color: #4CAF50; /* Fallback verde césped si la imagen no carga */
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    perspective: 1000px; /* Agregado para efecto 3D en confetis */
+    color: rgb(255, 251, 251);
+    perspective: 100px; /* Agregado para efecto 3D en confetis */
+    position: relative; /* Necesario para el pseudo-elemento */
+}
+
+/* Usar un pseudo-elemento para la imagen de fondo con opacidad sin afectar el contenido */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    background-image: url('patron-hierba-verde-costuras_1284-52275.avif'); /* Imagen de césped de fútbol */
+    background-size: cover; /* Cubrir toda la pantalla */
+    background-position: center; /* Centrar */
+    background-repeat: no-repeat; /* No repetir */
+    opacity: 0.35; /* Ajusta la opacidad aquí (0 = transparente, 1 = opaco) */
+    pointer-events: none; /* Permitir interacción con el contenido encima */
+    z-index: -1; /* Colocar detrás del contenido */
 }
 
 @keyframes moveBg {
@@ -146,6 +159,7 @@ body {
     border: 2px solid rgba(255,255,255,0.4); /* Borde sutil */
     transition: transform .15s, opacity .2s;
     pointer-events: auto; /* Asegurar que todo el círculo sea clickeable */
+    outline: none; /* Eliminar outline azul en focus/click */
 }
 
 /* Eliminado el hover para quitar la "sombra cuadrada" (escala) */

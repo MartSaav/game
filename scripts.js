@@ -104,7 +104,7 @@ function spawnCircle() {
         if (navigator.vibrate) navigator.vibrate(50); // 📱 vibración mobile
 
         circle.classList.add("fade");
-        createConfetti(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY); // Cambiado a confetis
+        requestAnimationFrame(() => createConfetti(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY)); // Optimizado con requestAnimationFrame
 
         setTimeout(() => circle.remove(), 200);
     };
@@ -120,7 +120,7 @@ function spawnCircle() {
 
 function createConfetti(x, y) {
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd', '#f7dc6f', '#bb8fce']; // Colores variados para confetis
-    for (let i = 0; i < 20; i++) { // Más confetis (era 6)
+    for (let i = 0; i < 15; i++) { // Reducido a 15 para menos delay (era 20)
         const confetti = document.createElement("div");
         confetti.classList.add("confetti");
         confetti.style.left = x + "px";
@@ -139,7 +139,7 @@ function createConfetti(x, y) {
         confetti.style.setProperty("--rotateX", rotateX);
         confetti.style.setProperty("--rotateY", rotateY);
         document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 800); // Duración más corta para explosión (era 1500ms)
+        setTimeout(() => confetti.remove(), 800); // Duración más corta para explosión
     }
 }
 
