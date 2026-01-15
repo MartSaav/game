@@ -87,9 +87,9 @@ function spawnCircle() {
     circle.style.setProperty("--color", `hsla(${hue}, 80%, 60%, 0.8)`);
     circle.style.width = size + "px";
     circle.style.height = size + "px";
-    // Posicionamiento ajustado para evitar superposición con HUD y overflow en móviles
-    const maxTop = window.innerHeight - size - 100; // Evitar HUD y borde inferior
-    const maxLeft = window.innerWidth - size; // Evitar borde derecho
+    // Posicionamiento ajustado para evitar superposición con HUD, overflow en móviles y barras del sistema
+    const maxTop = window.innerHeight - size - 150; // Evitar HUD, borde inferior y barras (agregado 50px extra)
+    const maxLeft = window.innerWidth - size - 50; // Evitar borde derecho y barras (agregado 50px extra)
     circle.style.top = Math.random() * Math.max(0, maxTop) + 100 + "px"; // Asegurar no negativo
     circle.style.left = Math.random() * Math.max(0, maxLeft) + "px"; // Asegurar no negativo
 
@@ -119,7 +119,7 @@ function spawnCircle() {
 }
 
 function createConfetti(x, y) {
-    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd', '#f7dc6f', '#bb8fce']; // Colores variados para confetis
+    const colors = ['#d80a0aff', '#4ecdc4', '#06a5c9ff', '#16cf79ff', '#dd4b12ff', '#940a94ff', '#f5c712ff', '#a904f0ff']; // Colores variados para confetis
     for (let i = 0; i < 15; i++) { // Reducido a 15 para menos delay (era 20)
         const confetti = document.createElement("div");
         confetti.classList.add("confetti");
